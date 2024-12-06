@@ -42,6 +42,7 @@ export const Modal: React.FC = () => {
                         <div className="modal-quantity">
                             <label htmlFor="quantity">Кількість:</label>
                             <input
+                                style={{fontSize:'16px'}}
                                 type="number"
                                 id="quantity"
                                 min="1"
