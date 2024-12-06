@@ -1,0 +1,111 @@
+main {
+    padding: 30px 10px 0 10px;
+}
+
+.carousel {
+    position: relative;
+    max-width: 700px;
+    width: 100%;
+    height: 300px;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+    &-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: opacity 0.5s ease-in-out;
+    }
+}
+
+.footer {
+    width: 100%;
+    padding-top: 20px;
+
+    &__title {
+        padding-left: 10px;
+    }
+
+    &__list {
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: space-around;
+    }
+
+    &__card {
+        width: 300px;
+        max-width: 300px;
+        height: auto;
+        background-color: #f8f8f8;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        cursor: pointer;
+
+        &:focus,
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+    }
+
+    &__image {
+        width: 100%;
+        height: 200px;
+        object-fit: contain;
+        margin: 10px;
+    }
+
+    &__name {
+        margin: 16px 0;
+        font-size: 16px;
+    }
+
+    &__weight,
+    &__price,
+    &__description {
+        margin: 5px 0;
+    }
+
+    .footer__buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .footer__btn {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .footer__btn:hover {
+        background-color: #0056b3;
+    }
+
+    span {
+        font-weight: 800;
+    }
+}
