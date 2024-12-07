@@ -8,14 +8,15 @@ import { addToBasket } from 'slicers/basketSlice'
 export const Modal: React.FC = () => {
     const dispatch = useDispatch()
     const selectedCard = useSelector((state: RootState) => state.card.selectedCard)
-    const [quantity, setQuantity] = useState(1)
+    const [quantity, setQuantity] = useState<string>('')
 
     if (!selectedCard) return null
 
     const handleAddToCart = () => {
-        dispatch(addToBasket({ ...selectedCard, count: quantity }))
+        if (quantity === '' || quantity === '0') return;
+        dispatch(addToBasket({ ...selectedCard, count: Number(quantity) }))
         dispatch(clearSelectedCard())
-        dispatch(reduceStock({ id: selectedCard.id, quantity }))
+        dispatch(reduceStock({ id: selectedCard.id, quantity: Number(quantity) }))
     }
 
     return (
@@ -42,16 +43,26 @@ export const Modal: React.FC = () => {
                         <div className="modal-quantity">
                             <label htmlFor="quantity">Кількість:</label>
                             <input
-                                style={{fontSize:'16px'}}
+                                style={{ fontSize: '16px' }}
                                 type="number"
                                 id="quantity"
                                 min="1"
                                 max={selectedCard.count}
                                 value={quantity}
-                                onChange={(e) => setQuantity(Math.min(Math.max(Number(e.target.value), 1), selectedCard.count))}
+                                onChange={(e) => {
+                                    const value = e.target.value;
+                                    if (value === '' || (Number(value) >= 1 && Number(value) <= selectedCard.count)) {
+                                        setQuantity(value);
+                                    }
+                                }}
                             />
                         </div>
-                        <button className="modal-add" onClick={handleAddToCart}>Додати в кошик</button>
+                        <button className="modal-add"
+                            onClick={handleAddToCart}
+                            disabled={quantity === '' || quantity === '0'}
+                        >
+                            Додати в кошик
+                        </button>
                     </>
                 )}
             </div>
