@@ -1,14 +1,14 @@
 import './Menu.scss'
 import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { openModal } from 'slicers/modalSlice'
-import { RootState } from 'store'
 import { searchCards } from 'slicers/cardSlice'
 import { openBasket } from 'slicers/basketSlice'
+import { openRegistration } from 'slicers/registrationSlice'
 import { useState } from 'react'
+
 export const Menu = () => {
     const dispatch = useDispatch()
-    const cards = useSelector((state: RootState) => state.card.cards)
     const [searchQuery, setSearchQuery] = useState('')
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,7 +21,7 @@ export const Menu = () => {
         <nav className="menu">
             <ul className="menu__list">
                 <li className="menu__item">
-                    <Link to={'home'} style={{ color: 'black' }}>
+                    <Link to={''} style={{ color: 'black' }}>
                         <ion-icon name="home-outline" style={{ fontSize: '30px' }}></ion-icon>
                     </Link>
                 </li>
@@ -42,10 +42,11 @@ export const Menu = () => {
                     />
                 </li>
                 <li className="menu__item">
-                    <Link to={'admin'} style={{ color: 'black' }}>
-                        <ion-icon name="person-outline" style={{ fontSize: '30px' }}></ion-icon>
-                    </Link>
-
+                    <ion-icon name="person-outline"
+                        style={{ fontSize: '30px', cursor: 'pointer' }}
+                        onClick={() => dispatch(openRegistration())}
+                    >
+                    </ion-icon>
                 </li>
                 <li className="menu__item">
                     <ion-icon name="basket-outline"

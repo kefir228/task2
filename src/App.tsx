@@ -5,13 +5,7 @@ import { Menu } from 'components/Menu/Menu';
 import { Home } from 'components/HomePage/Home';
 import { Modal } from 'components/modalWindow/ModalWindow';
 import { Basket } from 'components/Basket/Basket';
-import razer from '../src/components/img/Razer.jpg'
-import logitech from '../src/components/img/logitech.webp'
-import hyperX from '../src/components/img/hyperx.jpg'
-
-const images = [razer, logitech, hyperX,];
-
-const interval = 3000;
+import { Registration } from './components/Registration/Registration';
 
 function App() {
   return (
@@ -20,8 +14,9 @@ function App() {
         <Menu />
         <Modal />
         <Basket />
+        <Registration/>    
         <Routes>
-          <Route path='home' element={<Home images={images} interval={interval} />} />
+          <Route path='' element={<Home/>} />
         </Routes>
       </div>
     </HashRouter>

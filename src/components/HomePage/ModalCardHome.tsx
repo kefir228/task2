@@ -20,7 +20,7 @@ export const Modal: React.FC = () => {
     }
 
     return (
-        <div className="modal-overlay" onClick={() => dispatch(clearSelectedCard())}>
+        <div className="modal-overlay">
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                 <button className="modal-close" onClick={() => dispatch(clearSelectedCard())}>✖</button>
                 <img src={selectedCard.image} alt={selectedCard.name} className="modal-image" />

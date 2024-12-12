@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from 'store'
 import { closeBasket, resetBasket } from 'slicers/basketSlice'
 import { increaseStock } from 'slicers/cardSlice'
+
 export const Basket = () => {
     const isOpen = useSelector((state: RootState) => state.basket.isOpen)
     const items = useSelector((state: RootState) => state.basket.items)
@@ -25,7 +26,7 @@ export const Basket = () => {
     const totalItems = items.reduce((sum, item) => sum + item.count, 0)
 
     return (
-        <div className="basket-overlay" onClick={() => dispatch(closeBasket())}>
+        <div className="basket-overlay">
             <div className="basket" onClick={(e) => e.stopPropagation()}>
                 <ul className='basket__header'>
                     <li>

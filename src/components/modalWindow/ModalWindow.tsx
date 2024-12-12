@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'store'
 import { closeModal } from 'slicers/modalSlice'
 import { toggleManufacturer, toggleType, setSortBy, resetFilters } from 'slicers/filterSlice'
+
 export const Modal = () => {
     const isOpen = useSelector((state: RootState) => state.modal.isOpen)
     const filters = useSelector((state: RootState) => state.filters)

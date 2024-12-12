@@ -55,24 +55,33 @@ const brands: Record<string, string> = {
     r: 'Razer',
 }
 
-const generateTypeFromFileName = (fileName: string): string => {
+enum Category {
+    Headphone = 'Headphone',
+    Keyboard = 'Keyboard',
+    Mouse = 'Mouse',
+    Laptop = 'Laptop',
+    Monitor = 'Monitor',
+    Unknown = 'Unknown Type',
+}
+
+const generateTypeFromFileName = (fileName: string): Category => {
     const match = fileName.match(/([a-z])([A-Za-z]+)(\d+)/i)
-    if (!match) return 'Unknown Type'
+    if (!match) return Category.Unknown
 
     const category = match[2].toLowerCase()
     switch (category) {
         case 'headphone':
-            return 'Headphone'
+            return Category.Headphone
         case 'keyboard':
-            return 'Keyboard'
+            return Category.Keyboard
         case 'mouse':
-            return 'Mouse'
+            return Category.Mouse
         case 'laptop':
-            return 'Laptop'
+            return Category.Laptop
         case 'monitor':
-            return 'Monitor'
+            return Category.Monitor
         default:
-            return 'Unknown Type'
+            return Category.Unknown
     }
 }
 

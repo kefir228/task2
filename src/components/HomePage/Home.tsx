@@ -4,14 +4,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'store'
 import { setSelectedCard } from 'slicers/cardSlice'
 import { Modal } from './ModalCardHome'
+import razer from '../img/Razer.jpg'
+import logitech from '../img/logitech.webp'
+import hyperX from '../img/hyperx.jpg'
 
-type CarouselProps = {
-    images: string[];
-    interval: number;
-}
+export const Home = () => {
 
-export const Home: React.FC<CarouselProps> = ({ images, interval }) => {
-
+    const images = [razer, logitech, hyperX]
+    const interval = 3000
+    
     const [currentIndex, setCurrentIndex] = useState(0)
     const [visibleCard, setVisibleCard] = useState(4)
     const [isShowAll, setIsShowAll] = useState(false)
