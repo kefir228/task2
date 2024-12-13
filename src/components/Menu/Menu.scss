@@ -2,6 +2,7 @@
     width: 100%;
     background-color: #4d4b4b;
     height: 80px;
+    box-sizing: border-box;
 
     &__list{
         display: flex;
@@ -26,6 +27,7 @@
 .basket-container {
     position: relative;
     display: inline-block;
+    box-sizing: border-box;
 }
 
 .badge {
@@ -36,7 +38,7 @@
     color: white;
     font-size: 12px;
     font-weight: bold;
-    padding: 4px 4px;
+    padding: 4px;
     border-radius: 60%;
     display: flex;
     justify-content: center;
