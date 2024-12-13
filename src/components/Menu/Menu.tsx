@@ -20,7 +20,7 @@ export const Menu = () => {
 
     return (
         <nav className="menu">
-            <ul className="menu__list">
+            <ul className={`menu__list ${countInBasket > 0 ? 'with-badge' : ''}`}>
                 <li className="menu__item">
                     <Link to={''} style={{ color: 'black' }}>
                         <ion-icon name="home-outline" style={{ fontSize: '30px' }}></ion-icon>
