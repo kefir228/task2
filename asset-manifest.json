@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/task2/static/css/main.17f5d4d7.css",
+    "main.css": "/task2/static/css/main.38199526.css",
     "main.js": "/task2/static/js/main.63f500a7.js",
     "static/media/hyperx.jpg": "/task2/static/media/hyperx.79757b3fca4c9e67c01a.jpg",
     "static/media/rHeadphone2.jpg": "/task2/static/media/rHeadphone2.7df5d892674c59aab6b8.jpg",
@@ -38,11 +38,11 @@
     "static/media/lMouse3.webp": "/task2/static/media/lMouse3.3b76b7bb972e05dbbb4c.webp",
     "static/media/lMouse1.webp": "/task2/static/media/lMouse1.da2b058c62bfe049481b.webp",
     "index.html": "/task2/index.html",
-    "main.17f5d4d7.css.map": "/task2/static/css/main.17f5d4d7.css.map",
+    "main.38199526.css.map": "/task2/static/css/main.38199526.css.map",
     "main.63f500a7.js.map": "/task2/static/js/main.63f500a7.js.map"
   },
   "entrypoints": [
-    "static/css/main.17f5d4d7.css",
+    "static/css/main.38199526.css",
     "static/js/main.63f500a7.js"
   ]
 }
