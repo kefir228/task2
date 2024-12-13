@@ -32,14 +32,16 @@ export const Registration: React.FC = () => {
     return (
         <div className="registration-overlay">
             <div className="registration">
-                <h1 className="registration__title">
-                    {isSignUp ? 'Sign up' : 'Sign in'}
-                </h1>
-                <ion-icon
-                    name="close-circle-outline"
-                    onClick={() => dispatch(closeRegistration())}
-                    style={{fontSize:'30px'}}
-                ></ion-icon>
+                <ul className='registration__list'>
+                    <h1 className="registration__title">
+                        {isSignUp ? 'Sign up' : 'Sign in'}
+                    </h1>
+                    <ion-icon
+                        name="close-circle-outline"
+                        onClick={() => dispatch(closeRegistration())}
+                        style={{ fontSize: '30px', cursor: 'pointer' }}
+                    ></ion-icon>
+                </ul>
                 {isSignUp && (
                     <input
                         type="text"

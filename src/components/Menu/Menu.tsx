@@ -1,16 +1,17 @@
 import './Menu.scss'
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { openModal } from 'slicers/modalSlice'
 import { searchCards } from 'slicers/cardSlice'
 import { openBasket } from 'slicers/basketSlice'
 import { openRegistration } from 'slicers/registrationSlice'
 import { useState } from 'react'
+import { RootState } from 'store'
 
 export const Menu = () => {
     const dispatch = useDispatch()
     const [searchQuery, setSearchQuery] = useState('')
-
+    const countInBasket = useSelector((state: RootState) => state.basket.items.length)
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value
         setSearchQuery(value)
@@ -49,10 +50,15 @@ export const Menu = () => {
                     </ion-icon>
                 </li>
                 <li className="menu__item">
-                    <ion-icon name="basket-outline"
-                        style={{ fontSize: '30px', cursor: 'pointer' }}
-                        onClick={() => dispatch(openBasket())}
-                    ></ion-icon>
+                    <div className="basket-container">
+                        <ion-icon name="basket-outline"
+                            style={{ fontSize: '30px', cursor: 'pointer' }}
+                            onClick={() => dispatch(openBasket())}
+                        ></ion-icon>
+                        {countInBasket > 0 && (
+                            <span className='badge'>{countInBasket}</span>
+                        )}
+                    </div>
                 </li>
             </ul>
         </nav>
