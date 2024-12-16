@@ -92,7 +92,7 @@ export const Registration: React.FC = () => {
     }
 
     if (!isOpen) return null
-
+    
     return (
         <div className="registration-overlay">
             <div className="registration">
@@ -100,6 +100,9 @@ export const Registration: React.FC = () => {
                     <h1 className="registration__title">
                         {isSignUp ? 'Sign up' : 'Sign in'}
                     </h1>
+                    <p>
+                        dshfsdkjf
+                    </p>
                     <ion-icon
                         name="close-circle-outline"
                         onClick={() => dispatch(closeRegistration())}
