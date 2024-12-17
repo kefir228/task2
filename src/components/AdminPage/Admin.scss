@@ -1,0 +1,29 @@
+.admin {
+
+
+    &__header {
+        display: flex;
+        list-style: none;
+        align-items: center;
+        justify-content: space-evenly;
+        padding-right: 40px;
+    }
+
+    &__logout-button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin: 5px;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: #0056b3;
+        }
+    }
+}
+
+

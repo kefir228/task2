@@ -4,18 +4,28 @@ import { useDispatch, useSelector } from 'react-redux'
 import { openModal } from 'slicers/modalSlice'
 import { searchCards } from 'slicers/cardSlice'
 import { openBasket } from 'slicers/basketSlice'
-import { openRegistration } from 'slicers/registrationSlice'
+import { openRegistration, Role, signOut } from 'slicers/registrationSlice'
 import { useState } from 'react'
 import { RootState } from 'store'
+
 
 export const Menu = () => {
     const dispatch = useDispatch()
     const [searchQuery, setSearchQuery] = useState('')
     const countInBasket = useSelector((state: RootState) => state.basket.items.length)
+    const { selectedRole, isSignedIn } = useSelector((state: RootState) => state.registration)
+
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value
         setSearchQuery(value)
         dispatch(searchCards(value))
+    }
+
+    const handleLogOut = () => {
+        dispatch(signOut())
+        localStorage.removeItem('name')
+        localStorage.removeItem('email')
+        localStorage.removeItem('password')
     }
 
     return (
@@ -43,11 +53,30 @@ export const Menu = () => {
                     />
                 </li>
                 <li className="menu__item">
-                    <ion-icon name="person-outline"
-                        style={{ fontSize: '30px', cursor: 'pointer' }}
-                        onClick={() => dispatch(openRegistration())}
-                    >
-                    </ion-icon>
+                    {isSignedIn ? (
+                        selectedRole === Role.Admin ? (
+                            <Link to="/admin" style={{ color: 'black' }}>
+                                <ion-icon
+                                    name="logo-electron"
+                                    style={{ fontSize: '30px', cursor: 'pointer' }}
+                                ></ion-icon>
+                            </Link>
+                        ) : selectedRole === Role.User ? (
+                            <Link to="/" style={{ color: 'black' }}>
+                                <ion-icon
+                                    name="log-out-outline"
+                                    style={{ fontSize: '30px', cursor: 'pointer' }}
+                                    onClick={handleLogOut}
+                                ></ion-icon>
+                            </Link>
+                        ) : null
+                    ) : (
+                        <ion-icon
+                            name="person-outline"
+                            style={{ fontSize: '30px', cursor: 'pointer' }}
+                            onClick={() => dispatch(openRegistration())}
+                        ></ion-icon>
+                    )}
                 </li>
                 <li className="menu__item">
                     <div className="basket-container">

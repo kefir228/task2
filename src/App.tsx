@@ -6,6 +6,7 @@ import { Home } from 'components/HomePage/Home';
 import { Modal } from 'components/modalWindow/ModalWindow';
 import { Basket } from 'components/Basket/Basket';
 import { Registration } from './components/Registration/Registration';
+import { Admin } from 'components/AdminPage/Admin';
 
 function App() {
   return (
@@ -14,9 +15,10 @@ function App() {
         <Menu />
         <Modal />
         <Basket />
-        <Registration/>    
+        <Registration/>
         <Routes>
-          <Route path='' element={<Home/>} />
+          <Route path='' element={<Home />} />
+          <Route path='/admin' element={<Admin />} />
         </Routes>
       </div>
     </HashRouter>

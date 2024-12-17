@@ -12,6 +12,7 @@ interface Registration {
     inputPassword: string
     inputName: string
     isSignUp: boolean
+    isSignedIn: boolean
 }
 
 const initialState: Registration = {
@@ -20,7 +21,8 @@ const initialState: Registration = {
     inputEmail: '',
     inputPassword: '',
     inputName: '',
-    isSignUp:false
+    isSignUp:false,
+    isSignedIn:false,
 }
 
 export const registrationSlice = createSlice({
@@ -47,9 +49,16 @@ export const registrationSlice = createSlice({
         },
         toggleSignUp: (state) => {
             state.isSignUp = !state.isSignUp
-        }
+        },
+        signIn: (state) => {
+            state.isSignedIn = true;
+        },
+        signOut: (state) => {
+            state.isSignedIn = false;
+            state.selectedRole = Role.User;
+        },
     }
 })
 
-export const { openRegistration, closeRegistration, inputEmail, inputPassword, setRole, inputName, toggleSignUp } = registrationSlice.actions
+export const { openRegistration, closeRegistration, inputEmail, inputPassword, setRole, inputName, toggleSignUp, signIn, signOut } = registrationSlice.actions
 export default registrationSlice.reducer

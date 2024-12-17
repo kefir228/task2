@@ -1,6 +1,6 @@
 import './Registration.scss'
 import { RootState } from 'store'
-import { Role, closeRegistration, setRole, inputEmail, inputPassword, inputName, toggleSignUp } from 'slicers/registrationSlice'
+import { Role, closeRegistration, setRole, inputEmail, inputPassword, inputName, toggleSignUp, signIn } from 'slicers/registrationSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
 
@@ -41,6 +41,7 @@ export const Registration: React.FC = () => {
                 dispatch(inputPassword(''));
                 setIsPassVisible(false)
                 setErrorMessage('')
+                dispatch(toggleSignUp())
                 dispatch(closeRegistration())
             } else {
                 setErrorMessage('Please fix validation errors!')
@@ -51,7 +52,8 @@ export const Registration: React.FC = () => {
             const storedPassword = localStorage.getItem('password')
 
             if (email === storedEmail && password === storedPassword) {
-                alert(`Welcome back, ${storedName}!`)
+                alert(`Welcome back, ${storedName}! You signed in as ${selectedRole}`)
+                dispatch(signIn())
                 dispatch(inputName(''));
                 dispatch(inputEmail(''));
                 dispatch(inputPassword(''));
@@ -100,9 +102,6 @@ export const Registration: React.FC = () => {
                     <h1 className="registration__title">
                         {isSignUp ? 'Sign up' : 'Sign in'}
                     </h1>
-                    <p>
-                        dshfsdkjf
-                    </p>
                     <ion-icon
                         name="close-circle-outline"
                         onClick={() => dispatch(closeRegistration())}
