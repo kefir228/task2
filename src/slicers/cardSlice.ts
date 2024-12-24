@@ -181,9 +181,16 @@ export const cardSlice = createSlice({
             if (card) {
                 card.count += action.payload.quantity;
             }
-        },
+        }, 
+        deleteCard: (state) => {
+            if(state.selectedCard){
+                state.cards = state.cards.filter(card => card.id !== state.selectedCard!.id)
+                state.allCards = state.cards.filter(card => card.id !== state.selectedCard!.id)
+                state.selectedCard = null
+            }
+        }
     }
 })
 
-export const { setCard, updateCard, searchCards, setSelectedCard, clearSelectedCard, reduceStock, increaseStock } = cardSlice.actions
+export const { setCard, updateCard, searchCards, setSelectedCard, clearSelectedCard, reduceStock, increaseStock, deleteCard} = cardSlice.actions
 export default cardSlice.reducer
