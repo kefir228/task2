@@ -26,7 +26,8 @@ export const Home = () => {
     }
 
     const filteredCards = cards
-        .filter((card) => {
+    .filter((card) => !card.isDeleted)    
+    .filter((card) => {
             if (filters.manufacturers.length > 0 && !filters.manufacturers.includes(card.name.split(' ')[0])) {
                 return false;
             }

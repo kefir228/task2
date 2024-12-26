@@ -1,75 +1,13 @@
 import './Admin.scss'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { signOut } from 'slicers/registrationSlice'
 import { Link } from 'react-router-dom'
-import { RootState } from 'store'
-import { useState } from 'react'
-import { Card, deleteCard, setSelectedCard } from 'slicers/cardSlice'
+import { useAdminLogic } from './useAdminLogic'
 
 export const Admin = () => {
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-
-    const handleLogOut = () => {
-        dispatch(signOut())
-        localStorage.removeItem('name')
-        localStorage.removeItem('email')
-        localStorage.removeItem('password')
-        navigate('/')
-    }
-
-    const allCards: Card[] = useSelector((state: RootState) => state.card.cards)
-    const selectedCard = useSelector((state: RootState) => state.card.selectedCard)
-    const [menuVisible, setMenuVisible] = useState(false)
-    const [selectedCardId, setSelectedCardId] = useState<string | null>(null)
-    const [menuPosition, setMenuPosition] = useState<{ top: number, left: number }>({ top: 0, left: 0 })
-
-    const handleCardClick = (cardId: string, event: React.MouseEvent) => {
-        const cardElement = event.currentTarget as HTMLElement
-        const rect = cardElement.getBoundingClientRect()
-        const windowWidth = window.innerWidth
-        const menuWidth = 180
-        const padding = 10
-        const isMobile = windowWidth <= 680
-
-        let leftPosition =
-            rect.left + window.scrollX + rect.width + padding + menuWidth <= windowWidth
-                ? rect.left + window.scrollX + rect.width + padding
-                : rect.left + window.scrollX - menuWidth - (padding + 20)
-
-        leftPosition =
-            leftPosition < padding
-                ? padding
-                : leftPosition
-
-        const topPosition =
-            isMobile || (rect.left + window.scrollX + rect.width + padding + menuWidth > windowWidth && leftPosition < padding)
-                ? rect.top + window.scrollY + rect.height + padding
-                : rect.top + window.scrollY + rect.height / 2
-
-        setSelectedCardId(cardId)
-        setMenuPosition({
-            top: topPosition,
-            left: leftPosition,
-        })
-        setMenuVisible(true)
-        dispatch(setSelectedCard(cardId))
-    };
-
-    const handleDelete = () => {
-        if(selectedCard){
-            dispatch(deleteCard())
-            closeModal()
-        }else{
-            throw new Error('No card selected')
-        }
-    }
-
-    const closeModal = () => {
-        setMenuVisible(false)
-        setSelectedCardId(null)
-    }
+    const {
+        allCards, selectedCard, menuVisible, menuPosition, isEditing, editedCard, isDiscount, editedDiscount,
+        setEditedDiscount, handleLogOut, handleCardClick, closeModal, handleDelete, handleRestoreCard, handleEditClick,
+        handleInputChange, handleSaveClick, handleDiscountClick, handleSaveDiscount,
+    } = useAdminLogic();
 
     return (
         <div className='admin'>
@@ -97,36 +35,125 @@ export const Admin = () => {
             <div className='footer'>
                 <ul className='footer__list'>
                     {allCards.map((card) => (
-                        <li className='footer__card' key={card.id} onClick={(event) => handleCardClick(card.id, event)}>
+                        <li
+                            className={`footer__card ${card.isDeleted ? 'deleted' : ''}`}
+                            key={card.id}
+                            onClick={(event) => handleCardClick(card.id, event)}>
+                            {card.isDeleted && (
+                                <div className="deleted-overlay">
+                                    <span style={{ rotate: '50deg', fontSize: '50px' }}>Видалено</span>
+                                </div>
+                            )}
                             <img src={card.image} alt={card.name} className='footer__image' />
-                            <h2 className='footer__name'>{card.name}</h2>
-                            <p className='footer__price'>
-                                <span>Ціна: </span>{card.price}$
-                            </p>
-                            <p className='footer__description'>
-                                <span>Опис: </span>{card.description}
-                            </p>
-                            <p className='footer__weight'>
-                                <span>Вага в уо: </span>{card.weight}
-                            </p>
-                            <p className='footer__count'>
-                                <span>Наявність: </span>{card.count}шт.
-                            </p>
+                            {isEditing && selectedCard?.id === card.id ? (
+                                <>
+                                    <input
+                                        type="number"
+                                        name="price"
+                                        value={editedCard?.price || ''}
+                                        onChange={handleInputChange}
+                                    />
+                                    <input
+                                        type="text"
+                                        name="description"
+                                        value={editedCard?.description || ''}
+                                        onChange={handleInputChange}
+                                    />
+                                    <input
+                                        type="number"
+                                        name="weight"
+                                        value={editedCard?.weight || ''}
+                                        onChange={handleInputChange}
+                                    />
+                                    <input
+                                        type="number"
+                                        name="count"
+                                        value={editedCard?.count || ''}
+                                        onChange={handleInputChange}
+                                    />
+                                    <button onClick={handleSaveClick}>Зберегти</button>
+                                    <button onClick={closeModal}>Скасувати</button>
+                                </>
+                            ) : isDiscount && selectedCard?.id === card.id ? (
+                                <>
+                                    <input
+                                        style={{ fontSize: '16px' }}
+                                        type="number"
+                                        id="discount"
+                                        min="1"
+                                        max="100"
+                                        value={editedDiscount}
+                                        onChange={(e) => {
+                                            const value = e.target.value;
+                                            if (value === '' || (/^\d+$/.test(value) && Number(value) >= 1 && Number(value) <= 100)) {
+                                                setEditedDiscount(value)
+                                            }
+                                        }}
+                                    />
+                                    <button onClick={handleSaveDiscount}>
+                                        Застосувати
+                                    </button>
+                                    <button onClick={closeModal}>
+                                        Скасувати
+                                    </button>
+                                </>
+                            ) : (
+                                <>
+                                    <h2 className='footer__name'>{card.name}</h2>
+                                    <p className='footer__price'>
+                                        {card.discount ? (
+                                            <>  
+                                                <span>Ціна: </span>
+                                                <span className="old-price">
+                                                    {card.price}$
+                                                </span>
+                                                <span className="new-price">
+                                                    {card.price * (1 - card.discount / 100)}$
+                                                </span>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <span>Ціна: </span>{card.price}$
+                                            </>
+                                        )}
+                                    </p>
+                                    <p className='footer__description'>
+                                        <span>Опис: </span>{card.description}
+                                    </p>
+                                    <p className='footer__weight'>
+                                        <span>Вага в уо: </span>{card.weight}
+                                    </p>
+                                    <p className='footer__count'>
+                                        <span>Наявність: </span>{card.count}шт.
+                                    </p>
+                                </>
+                            )}
                         </li>
                     ))}
                 </ul>
             </div>
-            {menuVisible && selectedCardId && (
+
+            {menuVisible && !isEditing && !isDiscount && (
                 <div className='admin__menu' style={{ top: `${menuPosition.top}px`, left: `${menuPosition.left}px` }}>
-                    <ion-icon name="close-outline" onClick={closeModal}></ion-icon><button >Редагувати картку</button>
-                    <button style={{ backgroundColor: 'red' }}
-                        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'darkred')}
-                        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'red')}
-                        onClick={handleDelete}
-                    >
-                        Видалити картку
-                    </button>
-                    <button>Додати знижку</button>
+                    <ion-icon name="close-outline" onClick={closeModal}></ion-icon>
+                    {selectedCard?.isDeleted ? (
+                        <button onClick={handleRestoreCard} style={{ backgroundColor: 'green', color: 'white' }}>
+                            Відновити картку
+                        </button>
+                    ) : (
+                        <>
+                            <button onClick={handleEditClick}>Редагувати картку</button>
+                            <button style={{ backgroundColor: 'red' }}
+                                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'darkred')}
+                                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'red')}
+                                onClick={handleDelete}
+                            >
+                                Видалити картку
+                            </button>
+                            <button onClick={handleDiscountClick}>Додати знижку</button>
+                        </>
+                    )}
+
                 </div>
             )}
         </div>

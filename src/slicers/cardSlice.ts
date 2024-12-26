@@ -41,6 +41,8 @@ export type Card = {
     count: number
     type: string
     weight: number
+    isDeleted?: boolean
+    discount?: number
 }
 
 interface CardState {
@@ -165,7 +167,8 @@ export const cardSlice = createSlice({
                 : [...state.allCards]
         },
         setSelectedCard: (state, action: PayloadAction<string>) => {
-            state.selectedCard = state.cards.find(card => card.id === action.payload) || null
+            const card = state.cards.find(card => card.id === action.payload);
+            state.selectedCard = card ? card : null;
         },
         clearSelectedCard: (state) => {
             state.selectedCard = null
@@ -181,16 +184,26 @@ export const cardSlice = createSlice({
             if (card) {
                 card.count += action.payload.quantity;
             }
-        }, 
+        },
         deleteCard: (state) => {
-            if(state.selectedCard){
-                state.cards = state.cards.filter(card => card.id !== state.selectedCard!.id)
-                state.allCards = state.cards.filter(card => card.id !== state.selectedCard!.id)
+            if (state.selectedCard) {
+                const cardIndex = state.cards.findIndex(card => card.id === state.selectedCard?.id)
+                if (cardIndex !== -1) {
+                    state.cards[cardIndex].isDeleted = true
+                }
                 state.selectedCard = null
+            }
+        },
+        createDiscount: (state, action: PayloadAction<{ id: string; discount: number }>) => {
+            const { id, discount } = action.payload
+            const card = state.cards.find(card => card.id === id)
+            if (card) {
+                card.discount = discount;
+                card.price = parseFloat((card.price * (1 - discount / 100)).toFixed(2))
             }
         }
     }
 })
 
-export const { setCard, updateCard, searchCards, setSelectedCard, clearSelectedCard, reduceStock, increaseStock, deleteCard} = cardSlice.actions
+export const { setCard, updateCard, searchCards, setSelectedCard, clearSelectedCard, reduceStock, increaseStock, deleteCard, createDiscount } = cardSlice.actions
 export default cardSlice.reducer

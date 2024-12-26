@@ -2,7 +2,7 @@ import './Menu.scss'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { openModal } from 'slicers/modalSlice'
-import { searchCards } from 'slicers/cardSlice'
+import { searchCards, clearSelectedCard } from 'slicers/cardSlice'
 import { openBasket } from 'slicers/basketSlice'
 import { openRegistration, Role, signOut } from 'slicers/registrationSlice'
 import { useState } from 'react'
@@ -21,6 +21,10 @@ export const Menu = () => {
         dispatch(searchCards(value))
     }
 
+    const handleHomeClick = () => {
+        dispatch(clearSelectedCard())
+    }
+
     const handleLogOut = () => {
         dispatch(signOut())
         localStorage.removeItem('name')
@@ -33,7 +37,7 @@ export const Menu = () => {
             <ul className={`menu__list ${countInBasket > 0 ? 'with-badge' : ''}`}>
                 <li className="menu__item">
                     <Link to={''} style={{ color: 'black' }}>
-                        <ion-icon name="home-outline" style={{ fontSize: '30px' }}></ion-icon>
+                        <ion-icon name="home-outline" style={{ fontSize: '30px' }} onClick={handleHomeClick}></ion-icon>
                     </Link>
                 </li>
                 <li className='menu__item'>
