@@ -63,4 +63,10 @@
     border-radius: 5px;
     cursor: pointer;
     font-size: 1em;
+
+    &:hover {
+        background-color: #0056b3;
+        transition: all 0.3s;
+        transform: scale(1.05);
+    }
 }

@@ -7,6 +7,7 @@ import { Modal } from 'components/modalWindow/ModalWindow';
 import { Basket } from 'components/Basket/Basket';
 import { Registration } from './components/Registration/Registration';
 import { Admin } from 'components/AdminPage/Admin';
+import { CustomCard } from 'components/AdminPage/CreateCustomCard/CustomCard';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Routes>
           <Route path='' element={<Home />} />
           <Route path='/admin' element={<Admin />} />
+          <Route path='/create' element={<CustomCard/>}/>
         </Routes>
       </div>
     </HashRouter>

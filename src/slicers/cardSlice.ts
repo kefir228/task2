@@ -43,6 +43,7 @@ export type Card = {
     weight: number
     isDeleted?: boolean
     discount?: number
+    oldPrice: number | null
 }
 
 interface CardState {
@@ -129,6 +130,7 @@ const initialState: CardState = {
         name: generateNameFromFileName(item.fileName),
         image: item.image,
         price: parseFloat((Math.random() * (500 - 50) + 50).toFixed(2)),
+        oldPrice: null,
         description: generateLoremDescription(),
         count: Math.floor(Math.random() * 100) + 1,
         type: generateTypeFromFileName(item.fileName),
@@ -198,9 +200,13 @@ export const cardSlice = createSlice({
             const { id, discount } = action.payload
             const card = state.cards.find(card => card.id === id)
             if (card) {
+                card.oldPrice = card.price
                 card.discount = discount;
                 card.price = parseFloat((card.price * (1 - discount / 100)).toFixed(2))
             }
+        },
+        createCastomCard: (state, action) => {
+
         }
     }
 })

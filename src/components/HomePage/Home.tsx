@@ -12,7 +12,7 @@ export const Home = () => {
 
     const images = [razer, logitech, hyperX]
     const interval = 3000
-    
+
     const [currentIndex, setCurrentIndex] = useState(0)
     const [visibleCard, setVisibleCard] = useState(4)
     const [isShowAll, setIsShowAll] = useState(false)
@@ -26,8 +26,8 @@ export const Home = () => {
     }
 
     const filteredCards = cards
-    .filter((card) => !card.isDeleted)    
-    .filter((card) => {
+        .filter((card) => !card.isDeleted)
+        .filter((card) => {
             if (filters.manufacturers.length > 0 && !filters.manufacturers.includes(card.name.split(' ')[0])) {
                 return false;
             }
@@ -121,8 +121,23 @@ export const Home = () => {
                                 <img src={card.image} alt={card.name} className='footer__image' />
                                 <h2 className='footer__name'>{card.name}</h2>
                                 <p className='footer__price'>
-                                    <span>Ціна: </span>{card.price}$
+                                    {card.discount ? (
+                                        <>
+                                            <span>Ціна: </span>
+                                            <span className="new-price">
+                                                {card.price}$
+                                            </span>
+                                            <span className="old-price">
+                                                {card.oldPrice}$
+                                            </span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <span>Ціна: </span>{card.price}$
+                                        </>
+                                    )}
                                 </p>
+
                                 <p className='footer__description'>
                                     <span>Опис: </span>{card.description}
                                 </p>

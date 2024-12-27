@@ -22,6 +22,9 @@
 
         &:hover {
             background-color: #0056b3;
+            transition: all 0.3s;
+            transform: scale(1.05);
+            
         }
     }
 
@@ -52,6 +55,8 @@
 
             &:hover {
                 background-color: #0056b3;
+                transition: all 0.3s;
+                transform: scale(1.05);
             }
         }
 
@@ -119,10 +124,78 @@ a {
 .old-price {
     text-decoration: line-through;
     color: red; 
-    margin-right: 10px;
+    font-size: 15px;
+    
 }
 
 .new-price {
     color: green; 
     font-weight: bold;
+    margin: 0 10px;
+    font-size: 20px;
+}
+
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    
+   
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+}
+
+.form-button {
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.save-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.save-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.cancel-button {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+.cancel-button:hover {
+    background-color: #b30000;
+    transform: scale(1.05);
 }

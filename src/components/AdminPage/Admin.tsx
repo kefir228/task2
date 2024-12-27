@@ -47,69 +47,76 @@ export const Admin = () => {
                             <img src={card.image} alt={card.name} className='footer__image' />
                             {isEditing && selectedCard?.id === card.id ? (
                                 <>
-                                    <input
-                                        type="number"
-                                        name="price"
-                                        value={editedCard?.price || ''}
-                                        onChange={handleInputChange}
-                                    />
-                                    <input
-                                        type="text"
-                                        name="description"
-                                        value={editedCard?.description || ''}
-                                        onChange={handleInputChange}
-                                    />
-                                    <input
-                                        type="number"
-                                        name="weight"
-                                        value={editedCard?.weight || ''}
-                                        onChange={handleInputChange}
-                                    />
-                                    <input
-                                        type="number"
-                                        name="count"
-                                        value={editedCard?.count || ''}
-                                        onChange={handleInputChange}
-                                    />
-                                    <button onClick={handleSaveClick}>Зберегти</button>
-                                    <button onClick={closeModal}>Скасувати</button>
+                                    <div className="form-container">
+                                        <input
+                                            className="form-input"
+                                            type="number"
+                                            name="price"
+                                            min='50'
+                                            max='500'
+                                            value={editedCard?.price || ''}
+                                            onChange={handleInputChange}
+                                        />
+                                        <input
+                                            className="form-input"
+                                            type="text"
+                                            name="description"
+                                            value={editedCard?.description || ''}
+                                            onChange={handleInputChange}
+                                        />
+                                        <input
+                                            className="form-input"
+                                            type="number"
+                                            name="weight"
+                                            value={editedCard?.weight || ''}
+                                            onChange={handleInputChange}
+                                        />
+                                        <input
+                                            className="form-input"
+                                            type="number"
+                                            min='0'
+                                            max='100'
+                                            name="count"
+                                            value={editedCard?.count || ''}
+                                            onChange={handleInputChange}
+                                        />
+                                        <div className="form-buttons">
+                                            <button onClick={handleSaveClick} className="form-button save-button" >Зберегти</button>
+                                            <button onClick={closeModal} className="form-button cancel-button">Скасувати</button>
+                                        </div>
+                                    </div>
                                 </>
                             ) : isDiscount && selectedCard?.id === card.id ? (
                                 <>
-                                    <input
-                                        style={{ fontSize: '16px' }}
-                                        type="number"
-                                        id="discount"
-                                        min="1"
-                                        max="100"
-                                        value={editedDiscount}
-                                        onChange={(e) => {
-                                            const value = e.target.value;
-                                            if (value === '' || (/^\d+$/.test(value) && Number(value) >= 1 && Number(value) <= 100)) {
-                                                setEditedDiscount(value)
-                                            }
-                                        }}
-                                    />
-                                    <button onClick={handleSaveDiscount}>
-                                        Застосувати
-                                    </button>
-                                    <button onClick={closeModal}>
-                                        Скасувати
-                                    </button>
+                                    <div className="form-container">
+                                        <input
+                                            className="form-input"
+                                            type="number"
+                                            id="discount"
+                                            min="1"
+                                            max="100"
+                                            value={editedDiscount}
+                                            onChange={(e) => {
+                                                const value = e.target.value;
+                                                if (value === '' || (/^\d+$/.test(value) && Number(value) >= 1 && Number(value) <= 100)) {
+                                                    setEditedDiscount(value)
+                                                }
+                                            }}
+
+                                        />
+                                        <button onClick={handleSaveDiscount} className="form-button save-button">Застосувати</button>
+                                        <button onClick={closeModal} className="form-button cancel-button">Скасувати</button>
+                                    </div>
                                 </>
                             ) : (
                                 <>
                                     <h2 className='footer__name'>{card.name}</h2>
                                     <p className='footer__price'>
                                         {card.discount ? (
-                                            <>  
+                                            <>
                                                 <span>Ціна: </span>
-                                                <span className="old-price">
-                                                    {card.price}$
-                                                </span>
-                                                <span className="new-price">
-                                                    {card.price * (1 - card.discount / 100)}$
-                                                </span>
+                                                <span className="new-price">{card.price}$</span>
+                                                <span className="old-price">{card.oldPrice}$</span>
                                             </>
                                         ) : (
                                             <>

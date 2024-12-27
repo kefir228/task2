@@ -63,7 +63,12 @@ export const Basket = () => {
                         </li>
                     </ul>
                     <div className='button__clear'>
-                        <button onClick={handleClickOnClear} className="basket__clear">
+                        <button onClick={handleClickOnClear}
+                            style={{ background: 'red' }}
+                            className="basket__clear"
+                            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'darkred')}
+                            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'red')}
+                        >
                             Очистити кошик
                         </button>
                         <button onClick={handleBuyItems} className="basket__clear">

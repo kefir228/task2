@@ -82,17 +82,16 @@ export const Modal = () => {
                 <ul className='exit__list'>
                     <li>
                         <ion-icon name="refresh-outline"
-                            style={{ fontSize: '30px', cursor:"pointer"}}
+                            style={{ fontSize: '30px', cursor: "pointer" }}
                             onClick={() => dispatch(resetFilters())}
                         ></ion-icon>
                     </li>
                     <li>
                         <ion-icon name="exit-outline"
                             onClick={() => dispatch(closeModal())}
-                            style={{ fontSize: '30px', cursor:'pointer' }}
+                            style={{ fontSize: '30px', cursor: 'pointer' }}
                         ></ion-icon>
                     </li>
-
                 </ul>
             </div>
         </div>

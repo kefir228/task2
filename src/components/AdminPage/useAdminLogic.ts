@@ -27,7 +27,7 @@ export const useAdminLogic = () => {
     }
 
     const handleCardClick = (cardId: string, event: React.MouseEvent) => {
-        if (!isEditing) {
+        if (!isEditing && !isDiscount) {
             const cardElement = event.currentTarget as HTMLElement
             const rect = cardElement.getBoundingClientRect()
             const windowWidth = window.innerWidth
@@ -103,12 +103,33 @@ export const useAdminLogic = () => {
     }
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target
         if (editedCard) {
+            let updatedValue: string | number = value
+            if (name === 'price' || name === 'count' || name === 'weight') {
+                const numericValue = parseFloat(value)
+                if (name === 'price') {
+                    updatedValue = Math.max(50, Math.min(500, numericValue || 0));
+                }
+                if (name === 'weight') {
+                    updatedValue = Math.max(50, Math.min(500, numericValue || 0));
+                }
+                if (name === 'count') {
+                    updatedValue = Math.max(1, Math.min(100, numericValue || 0))
+                }
+            }
+
+            if (name === 'description') {
+                const word = value.trim().split(/\s+/)
+                if (word.length > 10) {
+                    updatedValue = word.slice(0, 10).join(' ') + '...'
+                } else{
+                    updatedValue = value
+                }
+            }
             setEditedCard({
                 ...editedCard,
-                [e.target.name]: e.target.name === 'price' || e.target.name === 'weight'
-                    ? parseFloat(e.target.value)
-                    : e.target.value
+                [name]: updatedValue,
             })
         }
     }
@@ -126,6 +147,7 @@ export const useAdminLogic = () => {
             setIsDiscount(true)
             setEditedDiscount('')
         }
+
     }
 
     const handleSaveDiscount = () => {
