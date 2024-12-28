@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/task2/static/css/main.94de25d4.css",
-    "main.js": "/task2/static/js/main.72bcbe3c.js",
+    "main.css": "/task2/static/css/main.55962b8e.css",
+    "main.js": "/task2/static/js/main.0328e242.js",
     "static/media/hyperx.jpg": "/task2/static/media/hyperx.79757b3fca4c9e67c01a.jpg",
     "static/media/rHeadphone2.jpg": "/task2/static/media/rHeadphone2.7df5d892674c59aab6b8.jpg",
     "static/media/rMouse2.png": "/task2/static/media/rMouse2.d4eb6f53a6043a273cae.png",
@@ -16,6 +16,7 @@
     "static/media/xKeyboard3.webp": "/task2/static/media/xKeyboard3.30a42c361e7e1c4007e0.webp",
     "static/media/logitech.webp": "/task2/static/media/logitech.e49e62e66eab1c1200de.webp",
     "static/media/hyperx2.webp": "/task2/static/media/hyperx2.b72865d6f65807b56a45.webp",
+    "static/media/itachi.jpg": "/task2/static/media/itachi.c70b8cece6a1146dfd3c.jpg",
     "static/media/hyperx1.webp": "/task2/static/media/hyperx1.320d2518f8637ac6fa83.webp",
     "static/media/hyperx3.webp": "/task2/static/media/hyperx3.d9c8cfbd7bc051abbf86.webp",
     "static/media/xKeyboard1.webp": "/task2/static/media/xKeyboard1.291b89f0c94290cecdf8.webp",
@@ -38,11 +39,11 @@
     "static/media/lMouse3.webp": "/task2/static/media/lMouse3.3b76b7bb972e05dbbb4c.webp",
     "static/media/lMouse1.webp": "/task2/static/media/lMouse1.da2b058c62bfe049481b.webp",
     "index.html": "/task2/index.html",
-    "main.94de25d4.css.map": "/task2/static/css/main.94de25d4.css.map",
-    "main.72bcbe3c.js.map": "/task2/static/js/main.72bcbe3c.js.map"
+    "main.55962b8e.css.map": "/task2/static/css/main.55962b8e.css.map",
+    "main.0328e242.js.map": "/task2/static/js/main.0328e242.js.map"
   },
   "entrypoints": [
-    "static/css/main.94de25d4.css",
-    "static/js/main.72bcbe3c.js"
+    "static/css/main.55962b8e.css",
+    "static/js/main.0328e242.js"
   ]
 }
