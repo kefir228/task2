@@ -48,9 +48,9 @@ export const useCustomCard = () => {
         const newCard = {
             id: Date.now().toString(),
             image: isValidUrl(formState.photo) ? formState.photo : defaultImage,
-            name: formState.name || 'Назва відсутня',
+            name: formState.name || 'Itachi',
             price: Number(formState.price || parseFloat((Math.random() * (500 - 50) + 50).toFixed(2))),
-            description: formState.description || 'Опис відсутній',
+            description: formState.description || 'Сумний Itachi, бо ви не додали свою фотку(',
             weight: Number(formState.weight) || parseFloat((Math.random() * (500 - 50) + 50).toFixed(2)),
             count: Number(formState.count) || Math.floor(Math.random() * 100) + 1,
             oldPrice: null,
