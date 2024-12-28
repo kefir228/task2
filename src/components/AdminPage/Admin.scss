@@ -1,3 +1,15 @@
+@keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
 .admin {
 
     &__header {
@@ -84,12 +96,12 @@ a {
 }
 
 .admin__menu button:nth-child(2) {
-    background-color: #f44336;
+    background-color: greenyellow;
     color: white;
 }
 
 .admin__menu button:nth-child(2):hover {
-    background-color: #e53935;
+    background-color: yellow;
 }
 
 .admin__menu button:nth-child(3) {
@@ -191,7 +203,7 @@ a {
 }
 
 .cancel-button {
-    background-color: #ff4d4d;
+    background-color: red;
     color: white;
 }
 

@@ -205,11 +205,13 @@ export const cardSlice = createSlice({
                 card.price = parseFloat((card.price * (1 - discount / 100)).toFixed(2))
             }
         },
-        createCastomCard: (state, action) => {
-
+        createCastomCard: (state, action: PayloadAction<Card>) => {
+            const newCard = action.payload
+            state.cards.unshift(newCard)
+            state.allCards.unshift(newCard)
         }
     }
 })
 
-export const { setCard, updateCard, searchCards, setSelectedCard, clearSelectedCard, reduceStock, increaseStock, deleteCard, createDiscount } = cardSlice.actions
+export const { setCard, updateCard, searchCards, setSelectedCard, clearSelectedCard, reduceStock, increaseStock, deleteCard, createDiscount, createCastomCard } = cardSlice.actions
 export default cardSlice.reducer

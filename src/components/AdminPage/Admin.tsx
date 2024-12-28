@@ -6,14 +6,14 @@ export const Admin = () => {
     const {
         allCards, selectedCard, menuVisible, menuPosition, isEditing, editedCard, isDiscount, editedDiscount,
         setEditedDiscount, handleLogOut, handleCardClick, closeModal, handleDelete, handleRestoreCard, handleEditClick,
-        handleInputChange, handleSaveClick, handleDiscountClick, handleSaveDiscount,
+        handleInputChange, handleSaveClick, handleDiscountClick, handleSaveDiscount, handleInputBlur
     } = useAdminLogic();
 
     return (
         <div className='admin'>
             <ul className='admin__header'>
                 <li>
-                    <button className='admin__logout-button'>
+                    <button className='admin__logout-button' style={{animation: 'pulse 1s infinite'}}>
                         <Link to={'/create'}>Створити нову картку</Link>
                     </button>
                 </li>
@@ -56,6 +56,7 @@ export const Admin = () => {
                                             max='500'
                                             value={editedCard?.price || ''}
                                             onChange={handleInputChange}
+                                            onBlur={handleInputBlur}
                                         />
                                         <input
                                             className="form-input"
@@ -63,6 +64,7 @@ export const Admin = () => {
                                             name="description"
                                             value={editedCard?.description || ''}
                                             onChange={handleInputChange}
+                                            onBlur={handleInputBlur}
                                         />
                                         <input
                                             className="form-input"
@@ -70,15 +72,17 @@ export const Admin = () => {
                                             name="weight"
                                             value={editedCard?.weight || ''}
                                             onChange={handleInputChange}
+                                            onBlur={handleInputBlur}
                                         />
                                         <input
                                             className="form-input"
                                             type="number"
-                                            min='0'
+                                            min='1'
                                             max='100'
                                             name="count"
                                             value={editedCard?.count || ''}
                                             onChange={handleInputChange}
+                                            onBlur={handleInputBlur}
                                         />
                                         <div className="form-buttons">
                                             <button onClick={handleSaveClick} className="form-button save-button" >Зберегти</button>

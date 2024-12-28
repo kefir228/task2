@@ -105,6 +105,16 @@ export const useAdminLogic = () => {
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
         if (editedCard) {
+            setEditedCard({
+                ...editedCard,
+                [name]: value
+            })
+        }
+    }
+
+    const handleInputBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target
+        if (editedCard) {
             let updatedValue: string | number = value
             if (name === 'price' || name === 'count' || name === 'weight') {
                 const numericValue = parseFloat(value)
@@ -118,13 +128,10 @@ export const useAdminLogic = () => {
                     updatedValue = Math.max(1, Math.min(100, numericValue || 0))
                 }
             }
-
             if (name === 'description') {
                 const word = value.trim().split(/\s+/)
                 if (word.length > 10) {
                     updatedValue = word.slice(0, 10).join(' ') + '...'
-                } else{
-                    updatedValue = value
                 }
             }
             setEditedCard({
@@ -162,7 +169,7 @@ export const useAdminLogic = () => {
     return {
         allCards, selectedCard, menuVisible, menuPosition, isEditing, editedCard, isDiscount, editedDiscount,
         setEditedDiscount, handleLogOut, handleCardClick, closeModal, handleDelete, handleRestoreCard, handleEditClick,
-        handleInputChange, handleSaveClick, handleDiscountClick, handleSaveDiscount,
+        handleInputChange, handleSaveClick, handleDiscountClick, handleSaveDiscount,handleInputBlur
     };
 };
 
