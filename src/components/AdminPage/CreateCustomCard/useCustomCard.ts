@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { createCastomCard } from 'slicers/cardSlice'
+import { createCastomCard, clearSelectedCard } from 'slicers/cardSlice'
 import itachi from '../../img/itachi.jpg'
 
 interface FormState {
@@ -57,6 +57,7 @@ export const useCustomCard = () => {
             type: 'Unknown',
         }
         dispatch(createCastomCard(newCard))
+        dispatch(clearSelectedCard())
         navigate('/')
     }
 
